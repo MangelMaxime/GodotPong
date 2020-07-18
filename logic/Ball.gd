@@ -9,21 +9,20 @@ var direction
 func _ready():
 	randomize()
 	reset()
-	
+
 func reset():
 	# Reset to the center of the viewport
 	var viewport = get_viewport_rect().size
 	position = Vector2(viewport.x / 2, viewport.y / 2)
-	
+
 	# Randomize the initial direction
 	var horizontalDirection
-	var verticalDirection
-	
+
 	if randf() < 0.5:
 		horizontalDirection = 1
 	else:
 		horizontalDirection = -1
-		
+
 	bounce(horizontalDirection)
 
 func bounce(horizontalDirection):
@@ -36,6 +35,6 @@ func randomRightDirection():
 func _process(delta):
 	position += SPEED * direction * delta
 
-func _input(event):
+func _input(_event):
 	if Input.is_key_pressed(KEY_R):
 		reset()
