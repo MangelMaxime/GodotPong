@@ -1,0 +1,133 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://assets/Ball.png" type="Texture" id=1]
+[ext_resource path="res://logic/Ball.gd" type="Script" id=2]
+[ext_resource path="res://logic/PlayerPaddle.gd" type="Script" id=3]
+[ext_resource path="res://logic/BounceWall.gd" type="Script" id=4]
+[ext_resource path="res://logic/AIPaddle.gd" type="Script" id=5]
+[ext_resource path="res://logic/SideWall.gd" type="Script" id=6]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 11.064
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 5, 30 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 512, 8 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 300 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+
+[node name="Background" type="ColorRect" parent="."]
+margin_right = 1024.0
+margin_bottom = 600.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Ball" type="Area2D" parent="."]
+position = Vector2( 512, 300 )
+script = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Ball"]
+texture = ExtResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ball"]
+shape = SubResource( 1 )
+
+[node name="LeftPaddle" type="Area2D" parent="."]
+position = Vector2( 60, 300 )
+script = ExtResource( 5 )
+
+[node name="ColorRect" type="ColorRect" parent="LeftPaddle"]
+margin_left = -5.0
+margin_top = -30.0
+margin_right = 5.0
+margin_bottom = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPaddle"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="RigtPaddle" type="Area2D" parent="."]
+position = Vector2( 964, 300 )
+script = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="RigtPaddle"]
+margin_left = -5.0
+margin_top = -30.0
+margin_right = 5.0
+margin_bottom = 30.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigtPaddle"]
+shape = SubResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Floor" type="Area2D" parent="."]
+script = ExtResource( 4 )
+bounce_direction = -1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2( 512, 608 )
+shape = SubResource( 3 )
+
+[node name="Ceiling" type="Area2D" parent="."]
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
+position = Vector2( 512, -8 )
+shape = SubResource( 3 )
+
+[node name="LeftWall" type="Area2D" parent="."]
+position = Vector2( -10, 300 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource( 4 )
+
+[node name="RightWall" type="Area2D" parent="."]
+position = Vector2( 1034, 300 )
+script = ExtResource( 6 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource( 4 )
+
+[node name="Left Score" type="Label" parent="."]
+margin_left = 236.0
+margin_top = 24.0
+margin_right = 276.0
+margin_bottom = 38.0
+text = "0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right Score" type="Label" parent="."]
+margin_left = 743.0
+margin_top = 24.0
+margin_right = 783.0
+margin_bottom = 38.0
+text = "0"
+[connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
+[connection signal="area_entered" from="RigtPaddle" to="RigtPaddle" method="_on_area_entered"]
+[connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
+[connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
+[connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_area_entered"]
+[connection signal="area_entered" from="RightWall" to="RightWall" method="_on_area_entered"]
