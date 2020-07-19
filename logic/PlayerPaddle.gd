@@ -4,7 +4,7 @@ extends Area2D
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var MOVE_SPEED = 250
+var MOVE_SPEED = 275
 
 onready var _screen_size_y = get_viewport_rect().size.y
 

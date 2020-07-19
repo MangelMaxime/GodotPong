@@ -25,6 +25,9 @@ func reset():
 
 	bounce(horizontalDirection)
 
+	# Reset trail
+	$Trail.clear_points()
+
 func bounce(horizontalDirection):
 	direction = Vector2(horizontalDirection, randf() * 2 - 1)
 
