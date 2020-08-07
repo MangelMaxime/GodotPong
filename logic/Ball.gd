@@ -1,7 +1,7 @@
 extends Area2D
 class_name Ball
 
-export var SPEED = 200
+export var SPEED = 250
 
 onready var _speed = SPEED
 var direction
@@ -23,16 +23,26 @@ func reset():
 	else:
 		horizontalDirection = -1
 
-	bounce(horizontalDirection)
+	direction = Vector2(horizontalDirection, randf() * 2 - 1)
 
 	# Reset trail
 	$Trail.clear_points()
 
-func bounce(horizontalDirection):
-	direction = Vector2(horizontalDirection, randf() * 2 - 1)
+func bounce(paddleCenter : Vector2, horizontalDirection : int):
+	# Bounce against paddle logic
+	# If the paddle is static and the ball doesn't hit one of the edge
+	# reflect the ball like if it was boucing against a wall
+	# Increase the speed normally
 
-func randomRightDirection():
-	bounce(1)
+	# If the paddle is moving and the ball doesn't hit one of the edge
+	# reflect the ball in the direction of the paddle movement
+	# Increase the speed normally
+
+	# If the ball hit one of the edge bounce the ball at a steep angle and a bigger speed increase
+	if self.position.y > paddleCenter.y:
+		direction = Vector2(horizontalDirection, 0.5)
+	else:
+		direction = Vector2(horizontalDirection, -0.5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):

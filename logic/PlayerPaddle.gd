@@ -20,4 +20,4 @@ func _process(delta):
 
 func _on_area_entered(area):
 	if area.name == "Ball":
-		area.bounce(-1)
+		area.bounce(self.position, -1)

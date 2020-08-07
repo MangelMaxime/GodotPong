@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Separator.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://logic/AIPaddle.gd" type="Script" id=5]
 [ext_resource path="res://logic/SideWall.gd" type="Script" id=6]
 [ext_resource path="res://assets/Paddle.png" type="Texture" id=7]
+[ext_resource path="res://Scoreboard.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 31 )
@@ -16,6 +17,30 @@ extents = Vector2( 512, 8 )
 
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 300 )
+
+[sub_resource type="Animation" id=4]
+resource_name = "New Anim"
+loop = true
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("WinTitle/Label:rect_scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.604703, -0.00307441, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("WinTitle/Label:rect_scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.631192, -0.0394723, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
 
 [node name="Pong" type="Node2D"]
 
@@ -32,7 +57,7 @@ __meta__ = {
 
 [node name="Ball" parent="." instance=ExtResource( 1 )]
 position = Vector2( 512, 300 )
-SPEED = 250
+SPEED = 500
 
 [node name="LeftPaddle" type="Area2D" parent="."]
 position = Vector2( 60, 300 )
@@ -48,17 +73,17 @@ __meta__ = {
 [node name="Sprite" type="Sprite" parent="LeftPaddle"]
 texture = ExtResource( 7 )
 
-[node name="RigtPaddle" type="Area2D" parent="."]
+[node name="RightPaddle" type="Area2D" parent="."]
 position = Vector2( 964, 300 )
 script = ExtResource( 3 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigtPaddle"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightPaddle"]
 shape = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="Sprite" type="Sprite" parent="RigtPaddle"]
+[node name="Sprite" type="Sprite" parent="RightPaddle"]
 texture = ExtResource( 7 )
 
 [node name="Floor" type="Area2D" parent="."]
@@ -90,30 +115,34 @@ script = ExtResource( 6 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
 shape = SubResource( 3 )
 
-[node name="Left Score" type="Label" parent="."]
-margin_left = 236.0
-margin_top = 24.0
-margin_right = 276.0
-margin_bottom = 38.0
-text = "0"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right Score" type="Label" parent="."]
-margin_left = 743.0
-margin_top = 24.0
-margin_right = 783.0
-margin_bottom = 38.0
-text = "0"
-
 [node name="Separator" type="Sprite" parent="."]
 position = Vector2( 512, 300 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 6, 600 )
+
+[node name="LeftScoreboard" parent="." instance=ExtResource( 8 )]
+
+[node name="RightScoreboard" parent="." instance=ExtResource( 8 )]
+offset = Vector2( 512, 0 )
+
+[node name="WinTitle" type="AnimationPlayer" parent="."]
+"anims/New Anim" = SubResource( 4 )
+
+[node name="Label" type="Label" parent="WinTitle"]
+margin_left = 462.0
+margin_top = 300.0
+margin_right = 562.0
+margin_bottom = 314.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 50, 7 )
+text = "Player win !"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
-[connection signal="area_entered" from="RigtPaddle" to="RigtPaddle" method="_on_area_entered"]
+[connection signal="area_entered" from="RightPaddle" to="RightPaddle" method="_on_area_entered"]
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
 [connection signal="area_entered" from="Ceiling" to="Ceiling" method="_on_area_entered"]
 [connection signal="area_entered" from="LeftWall" to="LeftWall" method="_on_area_entered"]

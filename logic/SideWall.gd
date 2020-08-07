@@ -2,17 +2,16 @@ extends Area2D
 
 export var scoreReference = "Left"
 
-var score : Label
+var score : Scoreboard
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	var scorePath = "../" + scoreReference + " Score"
+	var scorePath = "../" + scoreReference + "Scoreboard"
 	score = get_node(scorePath)
 
 func _on_area_entered(area):
 	if area.name == "Ball":
-		var newScore = int(score.text) + 1
-		score.text = str(newScore)
+		score.increment()
 
 		var ball := area as Ball
 		ball.reset()

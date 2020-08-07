@@ -9,7 +9,7 @@ export var trail_length = 0
 func _ready():
 	target = get_node(targetPath)
 
-func _process(delta):
+func _process(_delta):
 	global_position = Vector2(0,0)
 	global_rotation = 0
 	point = target.global_position
