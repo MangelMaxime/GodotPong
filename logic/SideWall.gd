@@ -12,6 +12,3 @@ func _ready():
 func _on_area_entered(area):
 	if area.name == "Ball":
 		score.increment()
-
-		var ball := area as Ball
-		ball.reset()

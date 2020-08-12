@@ -9,20 +9,19 @@
 [ext_resource path="res://assets/Paddle.png" type="Texture" id=7]
 [ext_resource path="res://Scoreboard.tscn" type="PackedScene" id=8]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 6, 31 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=6]
 extents = Vector2( 512, 8 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 10, 300 )
 
 [sub_resource type="Animation" id=4]
-resource_name = "New Anim"
-loop = true
+resource_name = "Win animation"
 tracks/0/type = "bezier"
-tracks/0/path = NodePath("WinTitle/Label:rect_scale:x")
+tracks/0/path = NodePath("Text/Left:rect_scale:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -32,13 +31,33 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 1 )
 }
 tracks/1/type = "bezier"
-tracks/1/path = NodePath("WinTitle/Label:rect_scale:y")
+tracks/1/path = NodePath("Text/Left:rect_scale:y")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
 "points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.631192, -0.0394723, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Text/Right:rect_scale:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Text/Right:rect_scale:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
 "times": PoolRealArray( 0, 1 )
 }
 
@@ -65,7 +84,7 @@ script = ExtResource( 5 )
 MOVE_SPEED = 175
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftPaddle"]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -78,7 +97,7 @@ position = Vector2( 964, 300 )
 script = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightPaddle"]
-shape = SubResource( 1 )
+shape = SubResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -92,28 +111,28 @@ bounce_direction = -1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 position = Vector2( 512, 608 )
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="Ceiling" type="Area2D" parent="."]
 script = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ceiling"]
 position = Vector2( 512, -8 )
-shape = SubResource( 2 )
+shape = SubResource( 6 )
 
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2( -10, 300 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
-shape = SubResource( 3 )
+shape = SubResource( 7 )
 
 [node name="RightWall" type="Area2D" parent="."]
 position = Vector2( 1034, 300 )
 script = ExtResource( 6 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
-shape = SubResource( 3 )
+shape = SubResource( 7 )
 
 [node name="Separator" type="Sprite" parent="."]
 position = Vector2( 512, 300 )
@@ -122,21 +141,42 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 6, 600 )
 
 [node name="LeftScoreboard" parent="." instance=ExtResource( 8 )]
+winner_text = NodePath("../Text/Left")
+looser_text = NodePath("../Text/Right")
 
 [node name="RightScoreboard" parent="." instance=ExtResource( 8 )]
 offset = Vector2( 512, 0 )
+winner_text = NodePath("../Text/Right")
+looser_text = NodePath("../Text/Left")
 
 [node name="WinTitle" type="AnimationPlayer" parent="."]
-"anims/New Anim" = SubResource( 4 )
+"anims/Win animation" = SubResource( 4 )
 
-[node name="Label" type="Label" parent="WinTitle"]
-margin_left = 462.0
-margin_top = 300.0
-margin_right = 562.0
-margin_bottom = 314.0
+[node name="Text" type="Node" parent="."]
+
+[node name="Left" type="Label" parent="Text"]
+visible = false
+margin_left = 206.0
+margin_top = 150.0
+margin_right = 306.0
+margin_bottom = 164.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 50, 7 )
-text = "Player win !"
+text = "You win"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Right" type="Label" parent="Text"]
+visible = false
+margin_left = 718.0
+margin_top = 150.0
+margin_right = 818.0
+margin_bottom = 164.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 50, 7 )
+text = "You win"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

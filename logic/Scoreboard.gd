@@ -5,9 +5,16 @@ class_name Scoreboard
 export var max_score = 5
 export var offset = Vector2(0,0)
 export var size = Vector2(512,20)
-export var player_name = ""
+export(NodePath) var winner_text
+export(NodePath) var looser_text
 
 const score_slot = preload("res://ScoreSlot.tscn")
+
+onready var separator : Sprite = get_node("../Separator")
+onready var ball : Ball = get_node("../Ball")
+onready var win_title : AnimationPlayer = get_node("../WinTitle")
+onready var left_paddle : Node2D = get_node("../LeftPaddle")
+onready var right_paddle : Node2D = get_node("../RightPaddle")
 
 var current_score = 0
 
@@ -52,10 +59,22 @@ func _draw():
 func increment():
 	$Sockets.get_child(current_score).set_active()
 	current_score += 1
-
+	
+	# If this was a winning score
 	if current_score == max_score:
-		print("Player %s win!" % player_name)
-		pass
+		# Stop the ball processing
+		ball.stop()
+		# Hide the paddle from the screen for a cleaner display
+		left_paddle.hide()
+		right_paddle.hide()
+		# Update the text to show
+		get_node(winner_text).show()
+		get_node(looser_text).hide()
+		# Play the win animation
+		win_title.play("Win animation")
+	else:
+		ball.reset()
+
 
 func decrement():
 	current_score -= 1
