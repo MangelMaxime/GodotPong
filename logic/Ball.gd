@@ -4,15 +4,14 @@ class_name Ball
 export var SPEED = 250
 
 onready var _speed = SPEED
+
 var direction
-var is_alive = true
 
 func _ready():
 	randomize()
 	reset()
 
 func reset():
-	is_alive = true
 	# Reset to the center of the viewport
 	var viewport = get_viewport_rect().size
 	position = Vector2(viewport.x / 2, viewport.y / 2)
@@ -48,15 +47,8 @@ func bounce(paddleCenter : Vector2, horizontalDirection : int):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if is_alive:
-		position += SPEED * direction * delta
+	position += SPEED * direction * delta
 
 func _input(_event):
 	if Input.is_key_pressed(KEY_R):
 		reset()
-
-# Stop the ball logic
-# In general, this function should be called when the game has been won
-func stop():
-	is_alive = false
-	visible = false
