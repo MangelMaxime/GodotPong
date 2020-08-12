@@ -6,7 +6,7 @@ export var max_score = 5
 export var offset = Vector2(0,0)
 export var size = Vector2(512,20)
 export(NodePath) var winner_text
-export(NodePath) var looser_text
+export(String) var win_text
 
 const score_slot = preload("res://ScoreSlot.tscn")
 
@@ -63,18 +63,15 @@ func increment():
 	# If this was a winning score
 	if current_score == max_score:
 		# Stop the ball processing
-		ball.stop()
+#		ball.stop()
+		get_tree().paused = true
 		# Hide the paddle from the screen for a cleaner display
 		left_paddle.hide()
 		right_paddle.hide()
 		# Update the text to show
-		get_node(winner_text).show()
-		get_node(looser_text).hide()
+		get_node(winner_text).text = win_text
+		get_node("../UI").show()
 		# Play the win animation
 		win_title.play("Win animation")
 	else:
 		ball.reset()
-
-
-func decrement():
-	current_score -= 1

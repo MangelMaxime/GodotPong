@@ -1,0 +1,70 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://logic/UIScene.gd" type="Script" id=1]
+
+[node name="UI" type="Control"]
+pause_mode = 2
+visible = false
+margin_right = 1024.0
+margin_bottom = 600.0
+rect_pivot_offset = Vector2( 512, 300 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Outline" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -250.0
+margin_top = -200.0
+margin_right = 250.0
+margin_bottom = 200.0
+rect_pivot_offset = Vector2( 250, 200 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -245.0
+margin_top = -195.0
+margin_right = 245.0
+margin_bottom = 195.0
+rect_pivot_offset = Vector2( 245, 195 )
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": true
+}
+
+[node name="Next game hint" type="Label" parent="."]
+margin_left = 403.189
+margin_top = 385.783
+margin_right = 623.189
+margin_bottom = 399.783
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 110, 7 )
+text = "Press enter to play"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WinText" type="Label" parent="."]
+margin_left = 464.213
+margin_top = 203.813
+margin_right = 564.213
+margin_bottom = 217.813
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 50, 7 )
+text = "Player win"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

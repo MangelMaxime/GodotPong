@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Ball.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Separator.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://logic/SideWall.gd" type="Script" id=6]
 [ext_resource path="res://assets/Paddle.png" type="Texture" id=7]
 [ext_resource path="res://Scoreboard.tscn" type="PackedScene" id=8]
+[ext_resource path="res://UIScene.tscn" type="PackedScene" id=9]
 
 [sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 6, 31 )
@@ -20,45 +21,17 @@ extents = Vector2( 10, 300 )
 
 [sub_resource type="Animation" id=4]
 resource_name = "Win animation"
-tracks/0/type = "bezier"
-tracks/0/path = NodePath("Text/Left:rect_scale:x")
+tracks/0/type = "value"
+tracks/0/path = NodePath("UI:rect_scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.604703, -0.00307441, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/1/type = "bezier"
-tracks/1/path = NodePath("Text/Left:rect_scale:y")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.631192, -0.0394723, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/2/type = "bezier"
-tracks/2/path = NodePath("Text/Right:rect_scale:x")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
-}
-tracks/3/type = "bezier"
-tracks/3/path = NodePath("Text/Right:rect_scale:y")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"points": PoolRealArray( 1e-05, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 1 )
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1e-05, 1e-05 ), Vector2( 1, 1 ) ]
 }
 
 [node name="Pong" type="Node2D"]
@@ -123,6 +96,7 @@ shape = SubResource( 6 )
 [node name="LeftWall" type="Area2D" parent="."]
 position = Vector2( -10, 300 )
 script = ExtResource( 6 )
+scoreReference = "Right"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
 shape = SubResource( 7 )
@@ -141,46 +115,18 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 6, 600 )
 
 [node name="LeftScoreboard" parent="." instance=ExtResource( 8 )]
-winner_text = NodePath("../Text/Left")
-looser_text = NodePath("../Text/Right")
+winner_text = NodePath("../UI/WinText")
+win_text = "Computer win"
 
 [node name="RightScoreboard" parent="." instance=ExtResource( 8 )]
 offset = Vector2( 512, 0 )
-winner_text = NodePath("../Text/Right")
-looser_text = NodePath("../Text/Left")
+winner_text = NodePath("../UI/WinText")
+win_text = "Player win"
 
 [node name="WinTitle" type="AnimationPlayer" parent="."]
 "anims/Win animation" = SubResource( 4 )
 
-[node name="Text" type="Node" parent="."]
-
-[node name="Left" type="Label" parent="Text"]
-visible = false
-margin_left = 206.0
-margin_top = 150.0
-margin_right = 306.0
-margin_bottom = 164.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 50, 7 )
-text = "You win"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Right" type="Label" parent="Text"]
-visible = false
-margin_left = 718.0
-margin_top = 150.0
-margin_right = 818.0
-margin_bottom = 164.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 50, 7 )
-text = "You win"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="UI" parent="." instance=ExtResource( 9 )]
 [connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
 [connection signal="area_entered" from="RightPaddle" to="RightPaddle" method="_on_area_entered"]
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]
