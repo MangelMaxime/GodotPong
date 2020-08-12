@@ -4,7 +4,6 @@
 
 [node name="UI" type="Control"]
 pause_mode = 2
-visible = false
 margin_right = 1024.0
 margin_bottom = 600.0
 rect_pivot_offset = Vector2( 512, 300 )
@@ -43,10 +42,10 @@ __meta__ = {
 }
 
 [node name="Next game hint" type="Label" parent="."]
-margin_left = 403.189
-margin_top = 385.783
-margin_right = 623.189
-margin_bottom = 399.783
+margin_left = 402.0
+margin_top = 385.0
+margin_right = 622.0
+margin_bottom = 399.0
 rect_scale = Vector2( 2, 2 )
 rect_pivot_offset = Vector2( 110, 7 )
 text = "Press enter to play"
@@ -57,13 +56,13 @@ __meta__ = {
 }
 
 [node name="WinText" type="Label" parent="."]
-margin_left = 464.213
-margin_top = 203.813
-margin_right = 564.213
-margin_bottom = 217.813
+margin_left = 402.0
+margin_top = 200.0
+margin_right = 622.0
+margin_bottom = 214.0
 rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 50, 7 )
-text = "Player win"
+rect_pivot_offset = Vector2( 110, 7 )
+text = "Welcome in Pong game"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false

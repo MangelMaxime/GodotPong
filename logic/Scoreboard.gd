@@ -62,15 +62,15 @@ func increment():
 	
 	# If this was a winning score
 	if current_score == max_score:
-		# Stop the ball processing
-#		ball.stop()
+		# Make the main tree pause
+		# The UI scene is not pused waiting for a press on enter for a new game
 		get_tree().paused = true
-		# Hide the paddle from the screen for a cleaner display
-		left_paddle.hide()
-		right_paddle.hide()
 		# Update the text to show
 		get_node(winner_text).text = win_text
-		get_node("../UI").show()
+		var ui_scene = get_node("../UI")
+		ui_scene.show()
+		# Show the win text as by default it is hidden for the start of the game
+		ui_scene.get_node("WinText").show()
 		# Play the win animation
 		win_title.play("Win animation")
 	else:

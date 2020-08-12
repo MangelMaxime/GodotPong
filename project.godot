@@ -30,6 +30,10 @@ config/name="Godot Pong"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://logic/Global.gd"
+
 [display]
 
 window/size/resizable=false
