@@ -7,6 +7,8 @@ onready var about_button : Button = $CenterContainer/VBoxContainer/About
 onready var quit_button : Button = $CenterContainer/VBoxContainer/Quit
 onready var winner_label : RichTextLabel = $"CenterContainer/VBoxContainer/Winner text"
 
+const about_scene := preload("res://About.tscn")
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	self.setup_start_menu()
@@ -57,3 +59,7 @@ func setup_win_menu(text : String):
 func _on_Resume_pressed():
 	$".".hide()
 	get_tree().paused = false
+
+
+func _on_About_pressed():
+	get_tree().root.add_child(about_scene.instance())

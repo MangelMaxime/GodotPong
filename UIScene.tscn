@@ -64,7 +64,7 @@ __meta__ = {
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_right = 431.0
-margin_bottom = 308.0
+margin_bottom = 316.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -83,22 +83,22 @@ rect_min_size = Vector2( 0, 30 )
 [node name="Winner text" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
 margin_top = 79.0
 margin_right = 431.0
-margin_bottom = 121.0
-rect_min_size = Vector2( 0, 40 )
+margin_bottom = 129.0
+rect_min_size = Vector2( 0, 50 )
 focus_next = NodePath("../Button3")
 bbcode_enabled = true
 fit_content_height = true
 
 [node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 125.0
+margin_top = 133.0
 margin_right = 431.0
-margin_bottom = 155.0
+margin_bottom = 163.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="New game" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 159.0
+margin_top = 167.0
 margin_right = 431.0
-margin_bottom = 200.0
+margin_bottom = 208.0
 focus_next = NodePath("../Button3")
 text = "New game"
 
@@ -111,36 +111,37 @@ focus_next = NodePath("../Quit")
 text = "Resume"
 
 [node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 204.0
+margin_top = 212.0
 margin_right = 431.0
-margin_bottom = 209.0
+margin_bottom = 217.0
 rect_min_size = Vector2( 0, 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="About" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 213.0
+margin_top = 221.0
 margin_right = 431.0
-margin_bottom = 254.0
+margin_bottom = 262.0
 focus_next = NodePath("../Button3")
 text = "About"
 
 [node name="MarginContainer3" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 258.0
+margin_top = 266.0
 margin_right = 431.0
-margin_bottom = 263.0
+margin_bottom = 271.0
 rect_min_size = Vector2( 0, 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 267.0
+margin_top = 275.0
 margin_right = 431.0
-margin_bottom = 308.0
+margin_bottom = 316.0
 focus_previous = NodePath("../About")
 text = "Quit"
 [connection signal="pressed" from="CenterContainer/VBoxContainer/New game" to="." method="_on_New_game_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/About" to="." method="_on_About_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]
