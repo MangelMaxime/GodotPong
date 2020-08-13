@@ -1,12 +1,20 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://logic/UIScene.gd" type="Script" id=1]
+[ext_resource path="res://MainTheme.tres" type="Theme" id=2]
 
 [node name="UI" type="Control"]
 pause_mode = 2
-margin_right = 1024.0
-margin_bottom = 600.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -512.0
+margin_top = -300.0
+margin_right = 512.0
+margin_bottom = 300.0
 rect_pivot_offset = Vector2( 512, 300 )
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -41,29 +49,98 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
-[node name="Next game hint" type="Label" parent="."]
-margin_left = 402.0
-margin_top = 385.0
-margin_right = 622.0
-margin_bottom = 399.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 110, 7 )
-text = "Press enter to play"
-align = 1
-valign = 1
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -211.0
+margin_top = -154.0
+margin_right = 211.0
+margin_bottom = 154.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="WinText" type="Label" parent="."]
-margin_left = 402.0
-margin_top = 200.0
-margin_right = 622.0
-margin_bottom = 214.0
-rect_scale = Vector2( 2, 2 )
-rect_pivot_offset = Vector2( 110, 7 )
-text = "Welcome in Pong game"
-align = 1
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+margin_right = 431.0
+margin_bottom = 308.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
+margin_right = 431.0
+margin_bottom = 41.0
+text = "Welcome to Pong game"
+
+[node name="MarginContainer4" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 45.0
+margin_right = 431.0
+margin_bottom = 75.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="Winner text" type="RichTextLabel" parent="CenterContainer/VBoxContainer"]
+margin_top = 79.0
+margin_right = 431.0
+margin_bottom = 121.0
+rect_min_size = Vector2( 0, 40 )
+focus_next = NodePath("../Button3")
+bbcode_enabled = true
+fit_content_height = true
+
+[node name="MarginContainer" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 125.0
+margin_right = 431.0
+margin_bottom = 155.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="New game" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 159.0
+margin_right = 431.0
+margin_bottom = 200.0
+focus_next = NodePath("../Button3")
+text = "New game"
+
+[node name="Resume" type="Button" parent="CenterContainer/VBoxContainer"]
+visible = false
+margin_top = 194.0
+margin_right = 422.0
+margin_bottom = 235.0
+focus_next = NodePath("../Quit")
+text = "Resume"
+
+[node name="MarginContainer2" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 204.0
+margin_right = 431.0
+margin_bottom = 209.0
+rect_min_size = Vector2( 0, 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="About" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 213.0
+margin_right = 431.0
+margin_bottom = 254.0
+focus_next = NodePath("../Button3")
+text = "About"
+
+[node name="MarginContainer3" type="MarginContainer" parent="CenterContainer/VBoxContainer"]
+margin_top = 258.0
+margin_right = 431.0
+margin_bottom = 263.0
+rect_min_size = Vector2( 0, 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Quit" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 267.0
+margin_right = 431.0
+margin_bottom = 308.0
+focus_previous = NodePath("../About")
+text = "Quit"
+[connection signal="pressed" from="CenterContainer/VBoxContainer/New game" to="." method="_on_New_game_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Resume" to="." method="_on_Resume_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Quit" to="." method="_on_Quit_pressed"]

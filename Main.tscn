@@ -118,19 +118,49 @@ region_rect = Rect2( 0, 0, 6, 600 )
 
 [node name="LeftScoreboard" parent="." instance=ExtResource( 8 )]
 max_score = 1
-winner_text = NodePath("../UI/WinText")
 win_text = "Computer win"
 
 [node name="RightScoreboard" parent="." instance=ExtResource( 8 )]
 max_score = 1
 offset = Vector2( 512, 0 )
-winner_text = NodePath("../UI/WinText")
 win_text = "Player win"
 
 [node name="WinTitle" type="AnimationPlayer" parent="."]
 "anims/Win animation" = SubResource( 4 )
 
+[node name="Computer" type="Label" parent="."]
+margin_left = 206.0
+margin_top = 50.0
+margin_right = 306.0
+margin_bottom = 82.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 50, 16 )
+text = "Computer"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Player" type="Label" parent="."]
+margin_left = 718.0
+margin_top = 50.0
+margin_right = 818.0
+margin_bottom = 82.0
+rect_scale = Vector2( 2, 2 )
+rect_pivot_offset = Vector2( 50, 16 )
+text = "Player"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="UI" parent="." instance=ExtResource( 9 )]
+margin_left = 0.0
+margin_top = 0.0
+margin_right = 1024.0
+margin_bottom = 600.0
 [connection signal="area_entered" from="LeftPaddle" to="LeftPaddle" method="_on_area_entered"]
 [connection signal="area_entered" from="RightPaddle" to="RightPaddle" method="_on_area_entered"]
 [connection signal="area_entered" from="Floor" to="Floor" method="_on_area_entered"]

@@ -5,7 +5,6 @@ class_name Scoreboard
 export var max_score = 5
 export var offset = Vector2(0,0)
 export var size = Vector2(512,20)
-export(NodePath) var winner_text
 export(String) var win_text
 
 const score_slot = preload("res://ScoreSlot.tscn")
@@ -66,11 +65,9 @@ func increment():
 		# The UI scene is not pused waiting for a press on enter for a new game
 		get_tree().paused = true
 		# Update the text to show
-		get_node(winner_text).text = win_text
-		var ui_scene = get_node("../UI")
+		var ui_scene = get_node("../UI") as UIScene
 		ui_scene.show()
-		# Show the win text as by default it is hidden for the start of the game
-		ui_scene.get_node("WinText").show()
+		ui_scene.setup_win_menu(win_text)
 		# Play the win animation
 		win_title.play("Win animation")
 	else:
