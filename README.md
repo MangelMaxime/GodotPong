@@ -1,0 +1,5 @@
+- La gestion de l'interface graphique est étrange. Des fois, on fait des changements et ça casse tous le layout il faut le reconstruire. Ou alors si on fait des changements puis Ctrl+Z ça ne revient pas à l'état d'avant
+- Facile d'utilisation
+- On ne peut pas utiliser un éditeur externe pour éditer un fichier de script "tool". Les fichiers de script "tool" ne se charge pas toujours correctement tout seul. --> Solution bind "Ctrl+R" sur Reload scene from disk
+- Assez simple de faire des choses même sans internet et juste un PDF de la documentation
+- Le système de Node/Scene est intéressant mais c'est difficile de ne pas coupler fortement le code. Exemple: Pour accèder, aux différentx éléments via `$` ou `get_node`

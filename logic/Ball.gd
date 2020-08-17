@@ -4,18 +4,19 @@ class_name Ball
 export var SPEED = 250
 
 onready var _speed = SPEED
+onready var viewport = get_viewport_rect().size
 
 onready var hitSoundPlayer = $AudioStreamPlayer2D
 
-var direction
+var direction = Vector2(1, 1)
 
-func _ready():
-	randomize()
-	reset()
+#func _ready():
+#	randomize()
+#	reset()
 
 func reset():
+	self.visible = true
 	# Reset to the center of the viewport
-	var viewport = get_viewport_rect().size
 	position = Vector2(viewport.x / 2, viewport.y / 2)
 
 	# Randomize the initial direction
@@ -56,6 +57,8 @@ func play_bounce_sound():
 func _process(delta):
 	position += SPEED * direction * delta
 
-func _input(_event):
-	if Input.is_key_pressed(KEY_R):
-		reset()
+	# If the ball hit the paddle and the wall very quickly
+	# it can happen that it goes out of the viewport
+	# clamp the position to make sure it stays on the screen	
+	position.x = clamp(position.x, 0, viewport.x)
+	position.y = clamp(position.y, 0, viewport.y)
