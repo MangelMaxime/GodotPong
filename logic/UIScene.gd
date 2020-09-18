@@ -24,6 +24,7 @@ func _on_New_game_pressed():
 	get_tree().paused = false
 
 func setup_pause_menu():
+	$".".show()
 	# Setup button visibility
 	new_game_button.hide()
 	resume_button.show()
@@ -35,6 +36,7 @@ func setup_pause_menu():
 	quit_button.focus_previous = resume_button.get_path()
 	
 func setup_start_menu():
+	$".".show()
 	# Setup button visibility
 	new_game_button.show()
 	resume_button.hide()
@@ -67,6 +69,7 @@ func _on_Resume_pressed():
 
 func _on_About_pressed():
 	bip_sound_player.play()
+	$".".hide()
 	get_tree().root.add_child(about_scene.instance())
 
 

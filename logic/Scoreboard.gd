@@ -65,7 +65,7 @@ func increment():
 		# The UI scene is not pused waiting for a press on enter for a new game
 		get_tree().paused = true
 		# Update the text to show
-		var ui_scene = get_node("../UI") as UIScene
+		var ui_scene = get_node("../UILayer/UI") as UIScene
 		ui_scene.show()
 		ui_scene.setup_win_menu(win_text)
 		# Play the win animation
