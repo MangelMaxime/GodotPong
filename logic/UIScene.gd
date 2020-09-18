@@ -6,6 +6,7 @@ onready var resume_button : Button = $CenterContainer/VBoxContainer/Resume
 onready var about_button : Button = $CenterContainer/VBoxContainer/About
 onready var quit_button : Button = $CenterContainer/VBoxContainer/Quit
 onready var winner_label : RichTextLabel = $"CenterContainer/VBoxContainer/Winner text"
+onready var bip_sound_player : AudioStreamPlayer2D = $BipSound
 
 const about_scene := preload("res://About.tscn")
 
@@ -14,9 +15,11 @@ func _ready():
 	self.setup_start_menu()
 
 func _on_Quit_pressed():
+	bip_sound_player.play()
 	get_tree().quit()
 
 func _on_New_game_pressed():
+	bip_sound_player.play()
 	get_tree().reload_current_scene()
 	get_tree().paused = false
 
@@ -57,9 +60,15 @@ func setup_win_menu(text : String):
 	quit_button.focus_previous = about_button.get_path()
 
 func _on_Resume_pressed():
+	bip_sound_player.play()
 	$".".hide()
 	get_tree().paused = false
 
 
 func _on_About_pressed():
+	bip_sound_player.play()
 	get_tree().root.add_child(about_scene.instance())
+
+
+func _on_ui_element_focus_entered():
+	bip_sound_player.play()

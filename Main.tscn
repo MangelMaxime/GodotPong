@@ -118,6 +118,7 @@ region_rect = Rect2( 0, 0, 6, 600 )
 
 [node name="LeftScoreboard" parent="." instance=ExtResource( 8 )]
 max_score = 1
+offset = Vector2( 0, 0 )
 win_text = "Computer win"
 
 [node name="RightScoreboard" parent="." instance=ExtResource( 8 )]

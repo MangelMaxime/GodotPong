@@ -5,6 +5,8 @@ export var SPEED = 250
 
 onready var _speed = SPEED
 
+onready var hitSoundPlayer = $AudioStreamPlayer2D
+
 var direction
 
 func _ready():
@@ -44,6 +46,11 @@ func bounce(paddleCenter : Vector2, horizontalDirection : int):
 		direction = Vector2(horizontalDirection, 0.5)
 	else:
 		direction = Vector2(horizontalDirection, -0.5)
+		
+	self.play_bounce_sound()
+	
+func play_bounce_sound():
+	hitSoundPlayer.play()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
