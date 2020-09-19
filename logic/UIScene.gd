@@ -10,6 +10,11 @@ onready var bip_sound_player : AudioStreamPlayer2D = $BipSound
 
 const about_scene := preload("res://About.tscn")
 
+# Variable used to detect first load of the menu
+# Allow us to avoid playing a bip when starting the game
+# It was feeling weird
+var first_load = true
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	self.setup_start_menu()
@@ -74,4 +79,7 @@ func _on_About_pressed():
 
 
 func _on_ui_element_focus_entered():
-	bip_sound_player.play()
+	if first_load:
+		first_load = false
+	else:
+		bip_sound_player.play()
