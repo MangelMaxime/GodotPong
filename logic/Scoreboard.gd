@@ -14,6 +14,7 @@ onready var ball : Ball = get_node("../Ball")
 onready var win_title : AnimationPlayer = get_node("../WinTitle")
 onready var left_paddle : Node2D = get_node("../LeftPaddle")
 onready var right_paddle : Node2D = get_node("../RightPaddle")
+onready var delay_player : AnimationPlayer = get_node("../Delay")
 
 var current_score = 0
 
@@ -71,4 +72,7 @@ func increment():
 		# Play the win animation
 		win_title.play("Win animation")
 	else:
-		ball.reset()
+		ball.set_process(false)
+		delay_player.play("Timer")
+		
+		

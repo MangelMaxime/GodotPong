@@ -264,7 +264,6 @@ __meta__ = {
 }
 
 [node name="Delay_1" type="Label" parent="Delay"]
-visible = false
 self_modulate = Color( 1, 1, 1, 0 )
 margin_left = 487.0
 margin_top = 275.0
